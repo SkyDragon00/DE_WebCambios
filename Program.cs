@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using DE_WebCambios.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<DE_WebCambiosContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DE_WebCambiosContext") ?? throw new InvalidOperationException("Connection string 'DE_WebCambiosContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
